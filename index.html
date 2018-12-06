@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>JS Functions</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/night.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,100 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+                    <h1>JS Functions</h1>
+                    <p>by Maria Rachkovskaya</p>
+                </section>
+				<section>
+                    <h2>Ways to create a function</h2>
+                    <ol>
+                        <li class="fragment">Function Declaration</li>
+                        <li class="fragment">Function Expression</li>
+                        <li class="fragment">new Function()</li>
+                    </ol>
+				</section>
+                <section>
+                    <section>
+                        <h2>Function Declaration <br><span class="color-accent">vs</span> <br>Function Expression</h2>
+                    </section>
+                    <section>
+                        <ul class="more-space">
+                            <li>Function Declarations hoist, Function Expressions do not</li>
+                            <li>Function Declaration is visible only in the block it was declared in,
+                                while function assigned to a variable can be called outside the block</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Anonymous<br><span class="color-accent">vs</span><br>Named Function<br></h2>
+                    </section>
+                    <section>
+                        <h3>Named Function Expression for recursion</h3>
+                        <code>
+                            let a = function b() {
+                            <br>b();
+                            <br>}
+                            <br><br>let c = a;
+                            <br>a = undefined;
+                            <br>c();
+                        </code>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Rules for passing parameters</h2>
+                        <ul>
+                            <li>Primitives are passed by value</li>
+                            <li>Objects are passed by reference</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Default value for variable</h3>
+                        <code>function newYear(year = 2019) { … }</code>
+                    </section>
+                </section>
+                <section>
+                    <h2>Return statement</h2>
+                    <p class="fragment">By default, when specifying 'return;' the function returns the value of undefined.</p>
+                </section>
+                <section>
+                    <h2>Ways to call a function</h2>
+                    <ol>
+                        <li class="fragment">Global call</li>
+                        <li class="fragment">Function-as-method call</li>
+                        <li class="fragment">apply(), call()</li>
+                        <li class="fragment">Function-as-constructor call</li>
+                    </ol>
+                </section>
+                <section>
+                    <section>
+                        <h2>Function as a constructor</h2>
+                    </section>
+                    <section>
+                        <p>When using classes in JS, you can create constructors for them through the keyword
+                            <span class="color-accent">constructor</span>. In this case, when calling ‘new ClassName ()’,
+                            its constructor will be called, which by default returns <span class="color-accent">this</span>,
+                            which is an instance of this class.</p>
+                    </section>
+                    <section>
+                        <p>Any function by default has a <span class="color-accent">prototype</span> property, which default value is an object
+                            with a single <span class="color-accent">constructor</span> property. And when you call a function as a constructor,
+                            an object created this way will have <span class="color-accent">__proto__</span> property with the value of this
+                            constructor. </p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Lexical environment and closures</h2>
+                    </section>
+                    <section>
+                        <h3>Closure: function + its variables</h3>
+                    </section>
+                </section>
+                <section>
+                    <h2 class="color-accent">Thank you for the attention!</h2>
+                </section>
 			</div>
 		</div>
 
