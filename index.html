@@ -29,20 +29,39 @@
                     <p>by Maria Rachkovskaya</p>
                 </section>
 				<section>
-                    <h2>Ways to create a function</h2>
-                    <ol>
-                        <li class="fragment">Function Declaration</li>
-                        <li class="fragment">Function Expression</li>
-                        <li class="fragment">new Function()</li>
-                    </ol>
+                    <section>
+                        <h2>Ways to create a function</h2>
+                    </section>
+                    <section>
+                        <h3>1. Function Declaration</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            function f(parameters) {
+                                //function body
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>2. Function Expression</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            let f = function(parameters) {
+                                //function body
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>3. new Function()</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            let f = new Function('parameters enumerated', 'function body');
+                        </code></pre>
+                    </section>
 				</section>
                 <section>
                     <section>
-                        <h2>Function Declaration <br><span class="color-accent">vs</span> <br>Function Expression</h2>
+                        <h2>Function Declaration <br><span class="emphasis">vs</span> <br>Function Expression</h2>
                     </section>
                     <section>
                         <ul class="more-space">
-                            <li>Function Declarations hoist, Function Expressions do not</li>
+                            <li>Function Declarations <span class="emphasis">hoist</span>, Function Expressions do not</li>
                             <li>Function Declaration is visible only in the block it was declared in,
                                 while function assigned to a variable can be called outside the block</li>
                         </ul>
@@ -50,45 +69,108 @@
                 </section>
                 <section>
                     <section>
-                        <h2>Anonymous<br><span class="color-accent">vs</span><br>Named Function<br></h2>
+                        <h2>Anonymous<br><span class="emphasis">vs</span><br>Named Function<br></h2>
                     </section>
                     <section>
                         <h3>Named Function Expression for recursion</h3>
-                        <code>
-                            let a = function b() {
-                            <br>b();
-                            <br>}
-                            <br><br>let c = a;
-                            <br>a = undefined;
-                            <br>c();
-                        </code>
+                        <pre><code data-trim class="hljs javascript">
+                            let f = function factorial(n) {
+                                return n ? n * factorial(n - 1) : 1;
+                            }
+
+                            let g = f;
+                            f = undefined;
+
+                            g(5); // returns 120
+                        </code></pre>
                     </section>
                 </section>
                 <section>
                     <section>
                         <h2>Rules for passing parameters</h2>
                         <ul>
-                            <li>Primitives are passed by value</li>
-                            <li>Objects are passed by reference</li>
+                            <li class="fragment">Primitives are passed <span class="emphasis">by value</span></li>
+                            <li class="fragment">Objects are passed <span class="emphasis">by reference</span></li>
                         </ul>
                     </section>
                     <section>
                         <h3>Default value for variable</h3>
-                        <code>function newYear(year = 2019) { … }</code>
+                        <pre><code data-trim class="hljs javascript">
+                            function newYear(year = 2019) {
+                                console.log(year);
+                            }
+
+                            newYear(2018); // 2018
+                            newYear(); // 2019 by default
+                        </code></pre>
                     </section>
                 </section>
                 <section>
-                    <h2>Return statement</h2>
-                    <p class="fragment">By default, when specifying 'return;' the function returns the value of undefined.</p>
+                    <section>
+                        <h2>Return statement</h2>
+                    </section>
+                    <section>
+                        <p>By default, when specifying <span class="emphasis">return</span>,
+                            the function returns the value of undefined.</p>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                        function f() {
+                            return;
+                        }
+
+                        console.log(f()); //undefined
+                    </code></pre>
+                    </section>
                 </section>
                 <section>
-                    <h2>Ways to call a function</h2>
-                    <ol>
-                        <li class="fragment">Global call</li>
-                        <li class="fragment">Function-as-method call</li>
-                        <li class="fragment">apply(), call()</li>
-                        <li class="fragment">Function-as-constructor call</li>
-                    </ol>
+                    <section>
+                        <h2>Ways to call a function</h2>
+                    </section>
+                    <section>
+                        <h3>1. Global call</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            function f(n) {
+                                console.log(n);
+                            }
+
+                            f(15); // 15
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>2. Function-as-method call</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            const obj = {
+                                property: function(n) { console.log(n); }
+                            };
+
+                            obj.f(15); // 15
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>3. apply(), call()</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            function showPie(size) {
+                                console.log(`Kind: ${this.kind}, size: ${size}`);
+                            }
+
+                            const bananaPie = {
+                                kind: 'banana'
+                            };
+                            const applePie = {
+                                kind: 'apple'
+                            };
+
+                            showPie.call(bananaPie, 'large'); // Kind: banana, size: large
+                            showPie.apply(applePie, ['small']); // Kind: apple, size: small
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>4. Function-as-constructor call</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            function Pie { ... }
+
+                            let pie = new Pie();
+                        </code></pre>
+                    </section>
                 </section>
                 <section>
                     <section>
@@ -96,15 +178,65 @@
                     </section>
                     <section>
                         <p>When using classes in JS, you can create constructors for them through the keyword
-                            <span class="color-accent">constructor</span>. In this case, when calling ‘new ClassName ()’,
-                            its constructor will be called, which by default returns <span class="color-accent">this</span>,
-                            which is an instance of this class.</p>
+                            <span class="emphasis">constructor</span>. In this case, when calling ‘new ClassName()’,
+                            its constructor will be called, which by default returns
+                            <span class="emphasis">this</span>.</p>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                            class User {
+                                constructor(name) {
+                                    this.name = name;
+                                    return this; // unnecessary, returns this by default
+                                }
+
+                                showName() {
+                                    console.log(this.name);
+                                }
+                            }
+
+                            let user = new User ('Maria');
+                            user.showName(); // Maria
+                        </code></pre>
                     </section>
                     <section>
-                        <p>Any function by default has a <span class="color-accent">prototype</span> property, which default value is an object
-                            with a single <span class="color-accent">constructor</span> property. And when you call a function as a constructor,
-                            an object created this way will have <span class="color-accent">__proto__</span> property with the value of this
+                        <h3>Specifying return</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            class User {
+                                constructor(name) {
+                                    this.name = name;
+                                    return {};
+                                }
+                            }
+
+                            let user = new User ('Maria');
+                            console.log(user); // {}
+                        </code></pre>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                            class User {
+                                constructor(name) {
+                                    this.name = name;
+                                    return 'user'; // will be ignored
+                                }
+                            }
+
+                            let user = new User ('Maria');
+                            console.log(user); // {name: 'Maria'}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>Any function by default has a <span class="emphasis">prototype</span> property, which default value is an object
+                            with a single <span class="emphasis">constructor</span> property. And when you call a function as a constructor,
+                            an object created this way will have <span class="emphasis">__proto__</span> property with the value of this
                             constructor. </p>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                            class User {
+                                constructor(name) {
+                                    this.name = name;
+                                }
+                            }
+
+                            let user = new User ('Maria');
+                            console.log(user.__proto__); // {constructor: class User}
+                        </code></pre>
                     </section>
                 </section>
                 <section>
@@ -112,11 +244,94 @@
                         <h2>Lexical environment and closures</h2>
                     </section>
                     <section>
-                        <h3>Closure: function + its variables</h3>
+                        <h3 class="emphasis">Closure: function + its scope</h3>
+                    </section>
+                    <section>
+                        <p>All variables inside the function are properties of a special internal
+                            <span class="emphasis">LexicalEnvironment</span> object, that is created when function is called.</p>
+                        <p>Also, when creating a function, it receives a hidden system property
+                            <span class="emphasis">[[Scope]]</span>, that refers to the lexical environment which it was created in.</p>
+                    </section>
+                    <section>
+                        <p>You can access not only a local variable, but also external ones from the function’s body.
+                            When accessing a variable, the interpreter first tries to find a variable in the current
+                            <span class="emphasis">LexicalEnvironment</span>, and then, if it is not there,
+                            it searches in an external object of variables.</p>
+                        <pre class="fragment column"><code data-trim class="hljs javascript">
+                            function outer() {
+                                let a = 10;
+
+                                function inner() {
+                                    let a = 20;
+                                    console.log(a);
+                                }
+
+                                inner();
+                            }
+
+                            outer(); // 20
+                        </code></pre>
+                        <pre class="fragment column"><code data-trim class="hljs javascript">
+                            function outer() {
+                                let a = 10;
+
+                                function inner() {
+                                    // no 'a'
+                                    console.log(a);
+                                }
+
+                                inner();
+                            }
+
+                            outer(); // 10
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>If a variable or function was declared inside a function, i.e. its lexical environment,
+                            it “closes” in function’s <span class="emphasis">closure</span>
+                            and is not reachable from the outside.</p>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                            function outer() {
+
+                                function inner() {
+                                    console.log('it works');
+                                }
+
+                                inner();
+                            }
+
+                            outer(); // it works
+                            inner(); // ReferenceError: inner is not defined
+                        </code></pre>
                     </section>
                 </section>
                 <section>
-                    <h2 class="color-accent">Thank you for the attention!</h2>
+                    <section>
+                        <h2>Arrow Functions</h2>
+                    </section>
+                    <section>
+                        <h3>Looks like this</h3>
+                        <pre><code data-trim class="hljs javascript">
+                            let f = (arg1, ..., argN) => expression
+                        </code></pre>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>Arrow Functions cannot be named</li>
+                            <li>They don’t have their own lexical environment</li>
+                            <li>Arrow function cannot be called as constructor</li>
+                        </ul>
+                        <pre class="fragment"><code data-trim class="hljs javascript">
+                            const obj = {
+                                sum: () => this
+                            };
+
+                            obj.sum(); // window, not obj
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h2 class="emphasis">Thank you for the attention!</h2>
                 </section>
 			</div>
 		</div>
